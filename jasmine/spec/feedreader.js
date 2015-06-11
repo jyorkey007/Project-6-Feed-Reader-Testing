@@ -94,13 +94,16 @@ $(function() {
     // by the loadFeed function that the content actually changes.
         describe('New Feed Selection', function() {
             beforeEach(function(done) {
-                loadFeed(0);
-                var oldContent = $('.feed').html();
-                loadFeed(1);
+                loadFeed(0, function() {
+                  var oldContent = $('.feed').html();                    
+                });
+                loadFeed(1, function() {
+                  var newContent = $('.feed').html();
+                });
                 done();
 
             it('loads different entry', function(done) {
-                expect(oldContent).not.toBe(oldContent);
+                expect(oldContent).not.toBe(newContent);
                 done();
             });
         });
